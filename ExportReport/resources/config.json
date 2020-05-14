@@ -1,0 +1,50 @@
+{
+    "gdb_name": "scratch",
+
+    "external_url": "https://gis.eea.mass.gov/portal",
+
+    "project_name": "ExportReport",
+
+    "report_filename": "Full Report",
+
+    "map_frames": {
+        "map": "Map Frame",
+        "inset_map": "Inset Map Frame"
+    },
+
+    "max_report_buffer": 10,
+
+    "aoi": {
+        "name": "AOI",
+        "outline_color": [255,0,0,75],
+        "fill_color": [0,0,0,0],
+        "outline_size": 2
+    },
+
+    "portal": {
+        "refresh_token": "",
+        "app_id": ""
+    },
+
+    "layouts": {
+        "basic_map": {
+            "aoi_outline_color": [250,255,0,75],
+            "aoi_outline_size": 2,
+            "name": "Basic Map",
+            "map": "Basic",
+            "placement": 1,
+            "preserve_extent": true,
+            "extent_buffer_percent": 10,
+            "localize_layers": {},
+            "replacement": {}
+        }
+    },
+
+    "generic_replacement": {
+        "VERSION": {
+            "value": "v0.1"
+        }
+    },
+
+    "table_frame_element": "Table Frame"
+}
