@@ -5,7 +5,7 @@ import json
 # CONFIGURABLE PROPERTIES
 
 portal_props = {
-  'url': 'https://gis.eea.mass.gov/portal',
+  'url': 'https://ps-dbs.maps.arcgis.com',
   'client_id': '',
   'client_secret': ''
 }
@@ -46,18 +46,31 @@ def get_portal_token():
   return token
 
 def add_features(service_url, add_features_params, token=None):
-  if token:
-    add_features_params['token'] = token
-  
-  add_features_params['features'] = json.dumps(add_features_params['features'])
+  payload = {
+    'f': 'json'
+  }
 
-  req = requests.post(service_url + '/addFeatures', data=add_features_params, verify=False)
+  if token:
+    payload['token'] = token
+  
+  payload['features'] = json.dumps(add_features_params)
+
+  req = requests.post(service_url + '/addFeatures', data=payload, verify=False)
   req_json = req.json()
+
+  if 'error' in req_json:
+    if req_json['error']['code'] == 498:
+      del payload['token']
+      req = requests.post(service_url + '/addFeatures', data=payload, verify=False)
+      req_json = req.json()
   return req_json
 
 def main():
   in_add_features_params = arcpy.GetParameter(0) # in add features params
-  in_add_features_params = json.loads(in_add_features_params)
+  try:
+    in_add_features_params = json.loads(in_add_features_params)
+  except:
+    in_add_features_params = []
 
   in_service_url = arcpy.GetParameter(1)
 
