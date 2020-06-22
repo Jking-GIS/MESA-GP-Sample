@@ -1,18 +1,26 @@
 import requests
 import arcpy
 import json
+import os
 
-# CONFIGURABLE PROPERTIES
-
-portal_props = {
-  'url': 'https://ps-dbs.maps.arcgis.com',
-  'client_id': '',
-  'client_secret': ''
-}
+######################################
+## TO BE MODIFIED BEFORE PUBLISHING ##
+######################################
+ROOT_PATH = 'C:\\Users\\jeff9123\\Documents\\github\\MESA-GP\\AddFeatures'
+######################################
+## TO BE MODIFIED BEFORE PUBLISHING ##
+######################################
 
 # CODE
 
+def open_config():
+  with open(os.path.join(ROOT_PATH, 'config.json')) as f:
+    return json.load(f)
+
 def get_portal_token():
+  config = open_config()
+  portal_props = config['portal']
+
   token = None
   portal_url = portal_props['url']
 
