@@ -24,6 +24,21 @@ def get_portal_token():
   token = None
   portal_url = portal_props['url']
 
+  if 'username' in portal_props and 'password' in portal_props:
+    try:
+      payload = {
+        'username': portal_props['username'],
+        'password': portal_props['password'],
+        'referer': 'http://localhost',
+        'client': 'referer',
+        'f': 'json'
+      }
+
+      req = requests.post(portal_url + '/sharing/rest/generateToken', data=payload, verify=False)
+      req_json = req.json()
+      token = req_json['token']
+    except (ValueError, KeyError):
+      return None
   if 'client_id' in portal_props and 'refresh_token' in portal_props:
     try:
       payload = {

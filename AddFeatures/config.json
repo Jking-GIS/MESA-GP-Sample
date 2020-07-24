@@ -1,7 +1,7 @@
 {
   "portal": {
-    "url": "https://ps-dbs.maps.arcgis.com",
-    "client_id": "DKlCNOfVhgMCTE42",
-    "client_secret": "e936012a88244e71afa7a91a651f1a96"
+    "url": "https://gis.eea.mass.gov/portal",
+    "username": "",
+    "password": ""
   }
 }
