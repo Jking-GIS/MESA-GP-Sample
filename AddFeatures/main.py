@@ -90,10 +90,12 @@ def add_features(service_url, add_features_params, token=None):
 
 def main():
   in_add_features_params = arcpy.GetParameter(0) # in add features params
+  in_add_features_params = in_add_features_params.replace('\\"', '"')
   try:
     in_add_features_params = json.loads(in_add_features_params)
   except:
-    in_add_features_params = []
+    arcpy.SetParameter(2, 'Invalid addFeaturesParams JSON, try again')
+    exit()
 
   in_service_url = arcpy.GetParameter(1)
 
